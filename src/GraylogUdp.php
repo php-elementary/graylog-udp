@@ -2,8 +2,8 @@
 
 namespace elementary\logger\graylog\udp;
 
-use elementary\loggertrait\LoggerGetInterface;
-use elementary\loggertrait\LoggerTrait;
+use elementary\logger\traits\LoggerGetInterface;
+use elementary\logger\traits\LoggerTrait;
 use Gelf\Logger;
 use Gelf\Publisher;
 use Gelf\Transport\UdpTransport;

@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.6",
-        "elementary/loggertrait": "^1.0",
+        "elementary/logger-trait": "^1.0",
         "graylog2/gelf-php": "^1.5",
         "psr/log": "^1.0"
     },
