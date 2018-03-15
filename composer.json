@@ -1,0 +1,26 @@
+{
+    "name":         "elementary/graylog-udp",
+    "description":  "A php implementation to send log-files to a Graylog server using the UDP transport",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":  "Artiom Vendelev",
+            "email": "artiom@vendelev.ru",
+            "role":  "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "elementary\\graylogudp\\": "src\\"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "elementary/loggertrait": "^1.0",
+        "graylog2/gelf-php": "^1.5",
+        "psr/log": "^1.0"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
