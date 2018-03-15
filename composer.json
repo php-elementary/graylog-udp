@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "elementary\\graylogudp\\": "src\\"
+            "elementary\\logger\\graylog\\udp\\": "src\\"
         }
     },
     "require": {

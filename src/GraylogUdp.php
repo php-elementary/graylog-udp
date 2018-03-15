@@ -1,6 +1,6 @@
 <?php
 
-namespace elementary\graylogudp;
+namespace elementary\logger\graylog\udp;
 
 use elementary\loggertrait\LoggerGetInterface;
 use elementary\loggertrait\LoggerTrait;
@@ -24,9 +24,8 @@ class GraylogUdp extends AbstractLogger implements LoggerGetInterface, LoggerAwa
         $transport = new UdpTransport($host, $port, UdpTransport::CHUNK_SIZE_LAN);
         $publisher = new Publisher();
         $publisher->addTransport($transport);
-        $logger = new Logger($publisher, $facility);
 
-        $this->setLogger($logger);
+        $this->setLogger(new Logger($publisher, $facility));
     }
 
     /**
@@ -40,6 +39,12 @@ class GraylogUdp extends AbstractLogger implements LoggerGetInterface, LoggerAwa
      */
     public function log($level, $message, array $context = array())
     {
+        foreach ($context as $key=>$val) {
+            if (is_array($val)) {
+                $context[$key] = json_encode($val, JSON_UNESCAPED_UNICODE);
+            }
+        }
+
         $this->getLogger()->log($level, $message, $context);
     }
 
