@@ -1,6 +1,6 @@
 {
     "name":         "elementary/graylog-udp",
-    "description":  "A php implementation to send log-files to a Graylog server using the UDP transport",
+    "description":  "The wrapper to send log-files to a Graylog server using the UDP transport",
     "license":      "MIT",
     "authors": [
         {
@@ -22,5 +22,8 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5"
     }
 }
