@@ -3,11 +3,13 @@
 namespace elementary\logger\tests;
 
 use elementary\logger\graylog\udp\GraylogUdp;
+use elementary\logger\traits\LoggerGetInterface;
 use Gelf\PublisherInterface;
 use Gelf\Transport\TransportInterface;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Log\AbstractLogger;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
 class GralogUdpTest extends TestCase
@@ -73,15 +75,11 @@ class GralogUdpTest extends TestCase
     {
         $testClass = new GraylogUdpForTest();
 
-        $mock = $this->getMockBuilder(GraylogUdp::class)
-            ->setMethods(['getLogger'])
-            ->setConstructorArgs(['test', ''])
-            ->getMock();
+        $mock = $this->getFullClass($testClass);
 
         $this->assertInstanceOf(LoggerInterface::class, $mock);
-
-        $mock->method('getLogger')
-            ->willReturn($testClass);
+        $this->assertInstanceOf(LoggerGetInterface::class, $mock);
+        $this->assertInstanceOf(LoggerAwareInterface::class, $mock);
 
         $mock->log('testLevel', 'testMessage', ['test', ['test' => 'test']]);
         $this->assertEquals(['testLevel', 'testMessage', ['test', json_encode(['test' => 'test'])]], $testClass->getLog());
@@ -96,6 +94,23 @@ class GralogUdpTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(null)
             ->getMock();
+
+        return $mock;
+    }
+
+    /**
+     * @param LoggerInterface $testClass
+     *
+     * @return GraylogUdp|PHPUnit_Framework_MockObject_MockObject
+     */
+    public function getFullClass(LoggerInterface $testClass)
+    {
+        $mock = $this->getMockBuilder(GraylogUdp::class)
+            ->setMethods(['getLogger'])
+            ->setConstructorArgs(['test', ''])
+            ->getMock();
+
+        $mock->method('getLogger')->willReturn($testClass);
 
         return $mock;
     }
@@ -120,6 +135,9 @@ class GraylogUdpForTest extends AbstractLogger
         $this->log = [$level, $message, $context];
     }
 
+    /**
+     * @return array
+     */
     public function getLog()
     {
         return $this->log;
