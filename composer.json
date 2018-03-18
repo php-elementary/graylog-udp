@@ -1,6 +1,6 @@
 {
     "name":         "elementary/graylog-udp",
-    "description":  "The wrapper to send log-files to a Graylog server using the UDP transport",
+    "description":  "The wrapper to send log-message to a Graylog server using the UDP transport",
     "license":      "MIT",
     "authors": [
         {

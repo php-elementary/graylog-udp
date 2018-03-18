@@ -1,4 +1,4 @@
-<h1>The wrapper to send log-files to a Graylog server using the UDP transport</h1>
+<h1>The wrapper to send log-message to a Graylog server using the UDP transport</h1>
 
 
 [![Latest Stable Version](https://poser.pugx.org/elementary/graylog-udp/v/stable)](https://packagist.org/packages/elementary/graylog-udp)
@@ -18,12 +18,15 @@ composer require elementary/graylog-udp
 Usage
 -----
 ```php
+use elementary\logger\graylog\udp\GraylogUdp;
 
+$ex = new GraylogUdp('TestFacility', 'TestHost', 12201);
+$ex->info('TestMessage', ['clientIp' => '127.0.0.1']);
 ```
 
 Testing and Code coverage
 -------
-Unit Tests are located in tests directory.
+Unit Tests are located in `tests` directory.
 You can run your tests and collect coverage with the following command:
 ```
 vendor/bin/phpunit
